@@ -1,44 +1,102 @@
-# Mintlify Starter Kit
+# docs
+
+
 
 Use the starter kit to get your docs deployed and ready to customize.
 
-Click the green **Use this template** button at the top of this repo to copy the Mintlify starter kit. The starter kit contains examples with
+## Table of Contents
 
-- Guide pages
-- Navigation
-- Customizations
-- API reference pages
-- Use of popular components
+- [Overview](#overview)
+- [Quick Start](#quick-start)
+- [Model Routing](#model-routing)
+- [Project Layout](#project-layout)
+- [Development](#development)
+- [Related Repositories](#related-repositories)
 
-**[Follow the full quickstart guide](https://starter.mintlify.com/quickstart)**
+## Overview
+
+Use the starter kit to get your docs deployed and ready to customize.
+
+| | |
+|---|---|
+| **Stack** | — |
+| **Frameworks** | — |
+| **Tests** | none detected |
+| **Commits** | 2 |
+| **Last activity** | 2026-08-10 |
+| **Visibility** | public |
+
+## Quick Start
+
+### Install
+
+```bash
+# No dependency manifest detected — see source layout below.
+```
+
+### Run
+
+```bash
+# Entry point not auto-detected; inspect the layout below.
+```
+
+## Model Routing
+
+Agent work in this repo routes through Azure AI Foundry. See [`AGENTS.md`](./AGENTS.md)
+for the full contract.
+
+| Purpose | Deployment | Endpoint |
+|---|---|---|
+| Default / general | `gpt-5.6-sol` | `/openai/v1/chat/completions` |
+| Deep reasoning | `claude-opus-5` | `/openai/v1/responses` **only** |
+| Embeddings | `text-embedding-3-small` | `/openai/v1/embeddings` |
+
+```bash
+export AZURE_FOUNDRY_API_KEY=...        # never commit this
+export AZURE_FOUNDRY_BASE_URL=https://<resource>.openai.azure.com/openai/v1
+```
+
+> **Gotcha:** Claude deployments on Azure return `404 api_not_supported` on
+> `/chat/completions`. They answer **only** via the Responses API.
+
+## Project Layout
+
+```
+AGENTS.md
+LICENSE
+README.md
+ai-tools/
+api-reference/
+development.mdx
+docs.json
+essentials/
+favicon.svg
+images/
+index.mdx
+logo/
+quickstart.mdx
+snippets/
+```
 
 ## Development
 
-Install the [Mintlify CLI](https://www.npmjs.com/package/mint) to preview your documentation changes locally. To install, use the following command:
+```bash
+# lint / format before committing
+# no linter configured
 
-```
-npm i -g mint
-```
-
-Run the following command at the root of your documentation, where your `docs.json` is located:
-
-```
-mint dev
+# run the CI check locally
+gh workflow run hermes-azure-check.yml
 ```
 
-View your local preview at `http://localhost:3000`.
+Secrets live in environment variables and CI secrets — never in tracked files.
 
-## Publishing changes
+## Related Repositories
 
-Install our GitHub app from your [dashboard](https://dashboard.mintlify.com/settings/organization/github-app) to propagate changes from your repo to your deployment. Changes are deployed to production automatically after pushing to the default branch.
+Part of a 84-repository workspace sharing one agentic contract:
 
-## Need help?
+- **[agentic-harness](https://github.com/sahiixx/agentic-harness)** — patterns, contracts, and reference implementations
+- `AGENTS.md` in every repo pins identical model routing
 
-### Troubleshooting
+---
 
-- If your dev environment isn't running: Run `mint update` to ensure you have the most recent version of the CLI.
-- If a page loads as a 404: Make sure you are running in a folder with a valid `docs.json`.
-
-### Resources
-- [Mintlify documentation](https://mintlify.com/docs)
-- [Mintlify community](https://mintlify.com/community)
+<sub>README maintained by the agentic harness · last regenerated 2026-08-10</sub>
